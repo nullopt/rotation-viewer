@@ -1,0 +1,458 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 12px;
+    gap: 12px;
+}
+
+a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* -- sr-only for accessibility -- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* -- header -- */
+header h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.alt1-warning {
+    font-size: 11px;
+    color: #f0ad4e;
+    margin-top: 2px;
+}
+
+/* -- guide picker collapsible -- */
+.guide-picker {
+    border: 1px solid #2a2a4a;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.guide-picker > summary {
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #a0a0b8;
+    background-color: #16213e;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s, background-color 0.15s;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.guide-picker > summary::before {
+    content: "\25B6";
+    font-size: 8px;
+    transition: transform 0.15s;
+}
+
+.guide-picker[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+.guide-picker > summary::-webkit-details-marker {
+    display: none;
+}
+
+.guide-picker > summary:hover {
+    color: #e0e0e0;
+    background-color: #1c2a4a;
+}
+
+.guide-picker__body {
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* -- guide selector -- */
+.guide-selector select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #3a3a5c;
+    border-radius: 4px;
+    background-color: #16213e;
+    color: #e0e0e0;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236c6c8a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+}
+
+.guide-selector select:focus {
+    border-color: #4fc3f7;
+}
+
+.guide-selector select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.guide-selector select optgroup {
+    color: #4fc3f7;
+    font-weight: 600;
+    font-style: normal;
+    background-color: #1a1a2e;
+}
+
+.guide-selector select option {
+    color: #e0e0e0;
+    background-color: #16213e;
+    padding: 4px 8px;
+}
+
+/* -- url fallback -- */
+.url-fallback {
+    font-size: 12px;
+    color: #6c6c8a;
+}
+
+.url-fallback summary {
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s;
+}
+
+.url-fallback summary:hover {
+    color: #a0a0b8;
+}
+
+.url-fallback .guide-input {
+    margin-top: 6px;
+}
+
+/* -- guide input -- */
+.guide-input {
+    display: flex;
+    gap: 6px;
+}
+
+.guide-input input {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #3a3a5c;
+    border-radius: 4px;
+    background-color: #16213e;
+    color: #e0e0e0;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.guide-input input:focus {
+    border-color: #4fc3f7;
+}
+
+.guide-input input::placeholder {
+    color: #6c6c8a;
+}
+
+.guide-input button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4fc3f7;
+    color: #1a1a2e;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    white-space: nowrap;
+}
+
+.guide-input button:hover:not(:disabled) {
+    background-color: #81d4fa;
+}
+
+.guide-input button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* -- status messages -- */
+.error-message {
+    padding: 8px;
+    border-radius: 4px;
+    background-color: rgba(244, 67, 54, 0.15);
+    border: 1px solid rgba(244, 67, 54, 0.4);
+    color: #ef9a9a;
+    font-size: 12px;
+}
+
+.loading-indicator {
+    text-align: center;
+    color: #4fc3f7;
+    font-size: 12px;
+    padding: 16px 0;
+}
+
+.placeholder-text {
+    text-align: center;
+    color: #6c6c8a;
+    font-size: 12px;
+    padding: 24px 0;
+}
+
+/* -- rotation display -- */
+.rotation-display {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rotation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.guide-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+/* -- display mode toggle -- */
+.display-mode-toggle {
+    display: flex;
+    border: 1px solid #3a3a5c;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.mode-btn {
+    padding: 3px 10px;
+    border: none;
+    background-color: transparent;
+    color: #a0a0b8;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.mode-btn:not(:last-child) {
+    border-right: 1px solid #3a3a5c;
+}
+
+.mode-btn:hover {
+    background-color: rgba(79, 195, 247, 0.1);
+    color: #e0e0e0;
+}
+
+.mode-btn--active {
+    background-color: #4fc3f7;
+    color: #1a1a2e;
+    font-weight: 600;
+}
+
+.mode-btn--active:hover {
+    background-color: #81d4fa;
+    color: #1a1a2e;
+}
+
+/* -- all phases block view -- */
+.all-phases {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.all-phases__section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.all-phases__heading {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4fc3f7;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #2a2a4a;
+}
+
+/* -- phase tabs -- */
+.phase-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #3a3a5c transparent;
+    padding-bottom: 4px;
+}
+
+.phase-tab {
+    padding: 4px 10px;
+    border: 1px solid #3a3a5c;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #a0a0b8;
+    font-size: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+
+.phase-tab:hover {
+    background-color: rgba(79, 195, 247, 0.1);
+    color: #e0e0e0;
+}
+
+.phase-tab--active {
+    background-color: #4fc3f7;
+    color: #1a1a2e;
+    border-color: #4fc3f7;
+    font-weight: 600;
+}
+
+.phase-tab--active:hover {
+    background-color: #81d4fa;
+    color: #1a1a2e;
+}
+
+/* -- phase content -- */
+.phase-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* -- rotation lines -- */
+.rotation-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3px;
+    line-height: 1.6;
+}
+
+.ability-token {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.ability-prefix {
+    font-size: 10px;
+    font-weight: 700;
+    color: #f0ad4e;
+    margin-right: 1px;
+}
+
+.ability-icon {
+    display: inline-block;
+    vertical-align: middle;
+    image-rendering: auto;
+}
+
+.rotation-arrow {
+    color: #6c6c8a;
+    font-size: 14px;
+    margin: 0 1px;
+}
+
+.rotation-plus {
+    color: #4fc3f7;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.rotation-text {
+    color: #b0b0c8;
+    font-size: 13px;
+}
+
+.rotation-text strong {
+    color: #e0e0e0;
+    font-weight: 600;
+}
+
+.rotation-text em {
+    color: #c0c0d8;
+    font-style: italic;
+}
+
+/* -- phase notes -- */
+.phase-notes {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid #2a2a4a;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.phase-note {
+    font-size: 12px;
+    color: #8888a8;
+    line-height: 1.5;
+}
+
+.phase-note strong {
+    color: #b0b0c8;
+    font-weight: 600;
+}
+
+.phase-note em {
+    color: #9898b8;
+    font-style: italic;
+}
+
+.phase-note .ability-icon {
+    vertical-align: text-bottom;
+}
